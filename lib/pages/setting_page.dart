@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learnblocprovider/cubit/local_cubit.dart';
 import 'package:learnblocprovider/extensions/context_extensioin.dart';
+
+import '../cubits/cubit/local_cubit.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learnblocprovider/bloc/counter_bloc.dart';
+import '../blocs/bloc/counter_bloc.dart';
 
 class FloatingButtons extends StatelessWidget {
   const FloatingButtons({super.key});

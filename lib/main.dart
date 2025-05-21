@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:learnblocprovider/bloc/counter_bloc.dart';
-import 'package:learnblocprovider/cubit_connection/internet_cubit.dart';
 import 'package:learnblocprovider/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'cubit/local_cubit.dart';
+import 'blocs/bloc/counter_bloc.dart';
+import 'cubits/cubit/local_cubit.dart';
+import 'cubits/cubit_connection/internet_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
