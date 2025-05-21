@@ -25,9 +25,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => CounterBloc())
       ],
-      child: BlocBuilder<LocalCubit, LocalState>(
+      child: BlocBuilder<LocalCubit, ChangeLocalState>(
         builder: (context, state) {
-          if (state is ChangeLocalState) {
             return MaterialApp(
               locale: state.locale,
               title: 'Flutter Local cubit',
@@ -62,14 +61,6 @@ class MyApp extends StatelessWidget {
               ),
               home: const HomePage(),
             );
-          }
-
-          // 👇 Show something while loading locale
-          return const MaterialApp(
-            home: Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            ),
-          );
         },
       ),
     );

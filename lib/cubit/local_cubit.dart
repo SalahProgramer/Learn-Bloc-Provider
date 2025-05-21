@@ -4,8 +4,8 @@ import 'package:learnblocprovider/helper/lang_cache_helper.dart';
 
 part 'local_state.dart';
 
-class LocalCubit extends Cubit<LocalState> {
-  LocalCubit() : super(LocalInitial());
+class LocalCubit extends Cubit<ChangeLocalState> {
+  LocalCubit() : super(ChangeLocalState(locale: Locale('en')));
 
   Future<void> getSaveLanguage() async {
     final String? cachedLanguageCode =

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learnblocprovider/cubit/local_cubit.dart';
 import 'package:learnblocprovider/extensions/context_extensioin.dart';
 
 class SettingPage extends StatelessWidget {
@@ -6,6 +8,7 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localCubit = context.read<LocalCubit>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -14,20 +17,34 @@ class SettingPage extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(8),
-          child: DropdownButton<String>(
-            value: 'ar',
-            icon: Icon(Icons.keyboard_arrow_down),
-            items: ['ar', "en"].map(
-              (String item) {
-                return DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(item),
-                );
+          child:  BlocConsumer<LocalCubit, ChangeLocalState>(   // BlocListener + BlocBuilder
+              listener: (context, state) {  // if do change the language do action in listener
+                // if (state is ChangeLocalState) {
+                  Navigator.of(context).pop();
+                // }
               },
-            ).toList(),
-            onChanged: (value) {},
+              builder: (context, state) {
+                  return DropdownButton<String>(
+                    value: state.locale.languageCode,
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    items: ['ar', "en"].map(
+                      (String item) {
+                        return DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(item),
+                        );
+                      },
+                    ).toList(),
+                    onChanged: (value) async {
+                      if (value != null) {
+                        await localCubit.changeLanguage(value);
+                      }
+                    },
+                  );
+              },
+            ),
           ),
-        ),
+
       ),
     );
   }
