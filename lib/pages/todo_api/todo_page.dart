@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learnblocprovider/cubits/todo_cubit/todos_cubit.dart';
 import 'package:learnblocprovider/widgets/error_widget.dart';
 import 'package:learnblocprovider/widgets/loading_widget.dart';
 import 'package:learnblocprovider/widgets/todos_widget.dart';
 
-import '../../blocs/todo_bloc/todos_bloc.dart';
 
 class TodoPage extends StatelessWidget {
   const TodoPage({super.key});
@@ -17,7 +17,7 @@ class TodoPage extends StatelessWidget {
         centerTitle: true,
         title: Text("Todo"),
       ),
-      body: BlocBuilder<TodosBloc, TodosState>(
+      body: BlocBuilder<TodosCubit, TodosState>(
         builder: (context, state) {
           if (state is CompletedState) {
             return TodosWidget(todos: state.todos);

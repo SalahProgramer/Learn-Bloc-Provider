@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:learnblocprovider/api/todo_api.dart';
 import 'package:learnblocprovider/blocs/todo_bloc/todos_bloc.dart';
+import 'package:learnblocprovider/cubits/todo_cubit/todos_cubit.dart';
 import 'package:learnblocprovider/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -29,8 +30,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CounterBloc()),
         // BlocProvider(create: (context) => InternetBloc())
         BlocProvider(create: (context) => InternetCubit()..checkConnection()),
-        BlocProvider(
-            create: (context) => TodosBloc(TodoApi())..add(GetAllTodosEvent()))
+        // BlocProvider(
+        //     create: (context) => TodosBloc(TodoApi())..add(GetAllTodosEvent()))
+
+        BlocProvider(create: (context) => TodosCubit(TodoApi())..getAllTodos()),
+
       ],
       child: BlocBuilder<LocalCubit, ChangeLocalState>(
         builder: (context, state) {
