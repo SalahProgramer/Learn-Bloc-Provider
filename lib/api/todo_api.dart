@@ -8,6 +8,7 @@ class TodoApi {
   static const String url = "https://jsonplaceholder.typicode.com/todos";
 
   Future<List<Todo>> getAllTodos() async {
+
     try {
       var response = await http.get(Uri.parse(url));
       List<Todo> todos = (json.decode(response.body))

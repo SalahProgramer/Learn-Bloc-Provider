@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learnblocprovider/blocs/todo_bloc/todos_bloc.dart';
 
 class MyErrorWidget extends StatelessWidget {
   final String message;
@@ -7,6 +9,7 @@ class MyErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final todo = BlocProvider.of<TodosBloc>(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -16,7 +19,11 @@ class MyErrorWidget extends StatelessWidget {
             child: Text(message,
                 style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
           ),
-          ElevatedButton(onPressed: () {}, child: Text("Try again"))
+          ElevatedButton(
+              onPressed: () {
+                todo.add(GetAllTodosEvent());
+              },
+              child: Text("Try again"))
         ],
       ),
     );
