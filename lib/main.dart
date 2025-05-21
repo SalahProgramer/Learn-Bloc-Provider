@@ -30,45 +30,44 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<LocalCubit, ChangeLocalState>(
         builder: (context, state) {
-            return MaterialApp(
-              locale: state.locale,
-              title: 'Flutter Local cubit',
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [Locale("en"), Locale("ar")],
-              localeResolutionCallback: (currentLang, supportLang) {
-                if (currentLang != null) {
-                  for (Locale locale in supportLang) {
-                    if (locale.languageCode == currentLang.languageCode) {
-                      return currentLang;
-                    }
+          return MaterialApp(
+            locale: state.locale,
+            title: 'Flutter Local cubit',
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [Locale("en"), Locale("ar")],
+            localeResolutionCallback: (currentLang, supportLang) {
+              if (currentLang != null) {
+                for (Locale locale in supportLang) {
+                  if (locale.languageCode == currentLang.languageCode) {
+                    return currentLang;
                   }
                 }
-                return supportLang.first;
-              },
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                useMaterial3: true,
-                elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white
-
-                )),
-                appBarTheme: const AppBarTheme(
-                  color: Colors.blue,
-                  foregroundColor: Colors.white,
-                ),
-                floatingActionButtonTheme: const FloatingActionButtonThemeData(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
+              }
+              return supportLang.first;
+            },
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              useMaterial3: true,
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white)),
+              appBarTheme: const AppBarTheme(
+                color: Colors.blue,
+                foregroundColor: Colors.white,
               ),
-              home: const HomePage(),
-            );
+              floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+              ),
+            ),
+            home: const HomePage(),
+          );
         },
       ),
     );

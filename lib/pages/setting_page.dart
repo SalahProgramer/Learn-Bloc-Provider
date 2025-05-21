@@ -17,34 +17,35 @@ class SettingPage extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(8),
-          child:  BlocConsumer<LocalCubit, ChangeLocalState>(   // BlocListener + BlocBuilder
-              listener: (context, state) {  // if do change the language do action in listener
-                // if (state is ChangeLocalState) {
-                  Navigator.of(context).pop();
-                // }
-              },
-              builder: (context, state) {
-                  return DropdownButton<String>(
-                    value: state.locale.languageCode,
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    items: ['ar', "en"].map(
-                      (String item) {
-                        return DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(item),
-                        );
-                      },
-                    ).toList(),
-                    onChanged: (value) async {
-                      if (value != null) {
-                        await localCubit.changeLanguage(value);
-                      }
-                    },
-                  );
-              },
-            ),
+          child: BlocConsumer<LocalCubit, ChangeLocalState>(
+            // BlocListener + BlocBuilder
+            listener: (context, state) {
+              // if do change the language do action in listener
+              // if (state is ChangeLocalState) {
+              Navigator.of(context).pop();
+              // }
+            },
+            builder: (context, state) {
+              return DropdownButton<String>(
+                value: state.locale.languageCode,
+                icon: Icon(Icons.keyboard_arrow_down),
+                items: ['ar', "en"].map(
+                  (String item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(item),
+                    );
+                  },
+                ).toList(),
+                onChanged: (value) async {
+                  if (value != null) {
+                    await localCubit.changeLanguage(value);
+                  }
+                },
+              );
+            },
           ),
-
+        ),
       ),
     );
   }

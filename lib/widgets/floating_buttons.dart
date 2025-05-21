@@ -7,7 +7,7 @@ class FloatingButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counterBloc=context.read<CounterBloc>();
+    final counterBloc = context.read<CounterBloc>();
     return Column(
       spacing: 10,
       mainAxisSize: MainAxisSize.min,

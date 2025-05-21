@@ -9,22 +9,17 @@ class InternetCubit extends Cubit<InternetState> {
 
   InternetCubit() : super(InternetInitial());
 
-
-
-  Future<void> checkConnection()async{
+  Future<void> checkConnection() async {
     subscription = Connectivity().onConnectivityChanged.listen(
-          (event) {
+      (event) {
         if (event == ConnectivityResult.wifi ||
             event == ConnectivityResult.mobile) {
           emit(ConnectedState(message: "Was connected"));
-       } else {
+        } else {
           emit(NotConnectedState(message: "Was not connected"));
         }
       },
     );
-
-
-
   }
 
   @override

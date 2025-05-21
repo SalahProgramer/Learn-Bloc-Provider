@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learnblocprovider/cubit_connection/internet_cubit.dart';
 import 'package:learnblocprovider/extensions/context_extensioin.dart';
+
 class ConnectionPage extends StatelessWidget {
   const ConnectionPage({super.key});
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learnblocprovider/extensions/context_extensioin.dart';
 import 'package:learnblocprovider/pages/connection_page.dart';
 import 'package:learnblocprovider/pages/setting_page.dart';
+import 'package:learnblocprovider/pages/todo_api/todo_page.dart';
 
 import '../widgets/floating_buttons.dart';
 
@@ -39,11 +40,20 @@ class _HomePageState extends State<HomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-
-                Navigator.of(context).push(MaterialPageRoute(builder:(context) =>   ConnectionPage()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ConnectionPage()));
               },
               child: Text(
                 context.language.connection,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => TodoPage()));
+              },
+              child: Text(
+                "To do",
               ),
             )
 

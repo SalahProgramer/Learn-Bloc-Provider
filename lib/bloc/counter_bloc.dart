@@ -16,11 +16,9 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
       } else if (event is DecrementEvent) {
         counter -= 1;
         emit(CounterValueChangedState(counter: counter));
-
       } else {
         counter = 0;
         emit(CounterValueChangedState(counter: counter));
-
       }
     });
   }
