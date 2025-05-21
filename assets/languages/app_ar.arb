@@ -2,5 +2,6 @@
   "@@locale": "ar",
   "hello_msg": "مرحبًا !!",
   "home": "الرئيسية",
-  "setting": "الإعدادات"
+  "setting": "الإعدادات",
+  "connection": "متصل"
 }

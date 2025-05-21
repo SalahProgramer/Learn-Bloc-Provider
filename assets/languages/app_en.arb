@@ -2,5 +2,6 @@
   "@@locale": "en",
   "hello_msg": "Hello there !!",
   "home": "Home",
-  "setting": "Setting"
+  "setting": "Setting",
+  "connection": "Connection"
 }

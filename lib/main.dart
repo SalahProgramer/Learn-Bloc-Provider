@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:learnblocprovider/bloc/counter_bloc.dart';
+import 'package:learnblocprovider/cubit_connection/internet_cubit.dart';
 import 'package:learnblocprovider/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,7 +24,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LocalCubit()..getSaveLanguage(),
         ),
-        BlocProvider(create: (context) => CounterBloc())
+        BlocProvider(create: (context) => CounterBloc()),
+        // BlocProvider(create: (context) => InternetBloc())
+        BlocProvider(create: (context) => InternetCubit()..checkConnection())
       ],
       child: BlocBuilder<LocalCubit, ChangeLocalState>(
         builder: (context, state) {
@@ -50,6 +53,11 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 useMaterial3: true,
+                elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white
+
+                )),
                 appBarTheme: const AppBarTheme(
                   color: Colors.blue,
                   foregroundColor: Colors.white,
