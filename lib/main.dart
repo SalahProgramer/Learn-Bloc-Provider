@@ -5,6 +5,8 @@ import 'package:learnblocprovider/bloc/counter_bloc.dart';
 import 'package:learnblocprovider/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'cubit/local_cubit.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -16,36 +18,59 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterBloc(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate
-        ],
-        locale: Locale( "ar"),
-        supportedLocales: const [Locale("en"), Locale("ar")],
-        localeResolutionCallback: (currentLang, supportLang) {
-          if (currentLang != null) {
-            for (Locale locale in supportLang) {
-              if (locale.languageCode == currentLang.languageCode) {
-                return currentLang;
-              }
-            }
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LocalCubit()..getSaveLanguage(),
+        ),
+        BlocProvider(create: (context) => CounterBloc())
+      ],
+      child: BlocBuilder<LocalCubit, LocalState>(
+        builder: (context, state) {
+          if (state is ChangeLocalState) {
+            return MaterialApp(
+              locale: state.locale,
+              title: 'Flutter Local cubit',
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [Locale("en"), Locale("ar")],
+              localeResolutionCallback: (currentLang, supportLang) {
+                if (currentLang != null) {
+                  for (Locale locale in supportLang) {
+                    if (locale.languageCode == currentLang.languageCode) {
+                      return currentLang;
+                    }
+                  }
+                }
+                return supportLang.first;
+              },
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                useMaterial3: true,
+                appBarTheme: const AppBarTheme(
+                  color: Colors.blue,
+                  foregroundColor: Colors.white,
+                ),
+                floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
+              ),
+              home: const HomePage(),
+            );
           }
-          return supportLang.first;
+
+          // 👇 Show something while loading locale
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            ),
+          );
         },
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            useMaterial3: true,
-            appBarTheme:
-                AppBarTheme(color: Colors.blue, foregroundColor: Colors.white),
-            floatingActionButtonTheme: FloatingActionButtonThemeData(
-                foregroundColor: Colors.white, backgroundColor: Colors.blue)),
-        home: const HomePage(),
       ),
     );
   }

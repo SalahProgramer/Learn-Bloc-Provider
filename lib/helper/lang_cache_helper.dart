@@ -9,7 +9,7 @@ class LanguageCacheHelper {
   Future<String?> getCacheLanguageCode() async {
     final sharedPreference = await SharedPreferences.getInstance();
     String? locale = sharedPreference.getString("LOCALE");
-    if (locale != null || locale != "") {
+    if (locale != null && locale.isNotEmpty) {
       return locale;
     } else {
       return "en";

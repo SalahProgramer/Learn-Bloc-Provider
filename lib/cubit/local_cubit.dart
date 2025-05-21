@@ -7,11 +7,14 @@ part 'local_state.dart';
 class LocalCubit extends Cubit<LocalState> {
   LocalCubit() : super(LocalInitial());
 
+  Future<void> getSaveLanguage() async {
+    final String? cachedLanguageCode =
+        await LanguageCacheHelper().getCacheLanguageCode();
+    emit(ChangeLocalState(locale: Locale(cachedLanguageCode??"en")));
+  }
 
-  Future<void> getSaveLanguage()async{
-    final String? cachedLanguageCode=await LanguageCacheHelper().getCacheLanguageCode();
-
-
-
+  Future<void> changeLanguage(String languageCode) async {
+    await LanguageCacheHelper().setCacheLanguageCode(languageCode);
+    emit(ChangeLocalState(locale: Locale(languageCode)));
   }
 }
