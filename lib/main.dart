@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:learnblocprovider/api/todo_api.dart';
-import 'package:learnblocprovider/blocs/todo_bloc/todos_bloc.dart';
 import 'package:learnblocprovider/cubits/todo_cubit/todos_cubit.dart';
-import 'package:learnblocprovider/pages/home_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'blocs/bloc/counter_bloc.dart';
+import 'core/imports/home_page-imports.dart';
 import 'cubits/cubit/local_cubit.dart';
 import 'cubits/cubit_connection/internet_cubit.dart';
+import 'helper/my_bloc_observer.dart';
 
 Future<void> main() async {
+  Bloc.observer = MyBlocObserver();
+
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LocalCubit()..getSaveLanguage(),
         ),
         BlocProvider(create: (context) => CounterBloc()),
-        // BlocProvider(create: (context) => InternetBloc())
+        // BlocProvider(create: (context) => InternetBloc()),
         BlocProvider(create: (context) => InternetCubit()..checkConnection()),
         // BlocProvider(
         //     create: (context) => TodosBloc(TodoApi())..add(GetAllTodosEvent()))

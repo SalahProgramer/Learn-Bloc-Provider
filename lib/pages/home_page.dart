@@ -1,10 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:learnblocprovider/extensions/context_extensioin.dart';
-import 'package:learnblocprovider/pages/connection_page.dart';
-import 'package:learnblocprovider/pages/setting_page.dart';
-import 'package:learnblocprovider/pages/todo_api/todo_page.dart';
+part of '../core/imports/home_page-imports.dart';
 
-import '../widgets/floating_buttons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

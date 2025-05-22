@@ -10,16 +10,23 @@ class InternetCubit extends Cubit<InternetState> {
   InternetCubit() : super(InternetInitial());
 
   Future<void> checkConnection() async {
+    final initialResult = await Connectivity().checkConnectivity();
+    handleConnectivityResult(initialResult);
+
     subscription = Connectivity().onConnectivityChanged.listen(
       (event) {
-        if (event == ConnectivityResult.wifi ||
-            event == ConnectivityResult.mobile) {
-          emit(ConnectedState(message: "Was connected"));
-        } else {
-          emit(NotConnectedState(message: "Was not connected"));
-        }
+        handleConnectivityResult(event);
       },
     );
+  }
+
+  void handleConnectivityResult(ConnectivityResult result) {
+    if (result == ConnectivityResult.wifi ||
+        result == ConnectivityResult.mobile) {
+      emit(ConnectedState(message: "Was connected"));
+    } else {
+      emit(NotConnectedState(message: "Was not connected"));
+    }
   }
 
   @override
