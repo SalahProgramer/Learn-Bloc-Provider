@@ -1,5 +1,4 @@
-part of '../core/imports/home_page-imports.dart';
-
+part of '../core/imports/home_page_imports.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,31 +49,16 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 "To do",
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => PostsPage()));
+              },
+              child: Text(
+                "Posts",
+              ),
             )
-
-//             BlocBuilder<CounterBloc,CounterState>(builder: (context, state) {
-//               if(state is CounterInitial){
-// return  Text(
-//   '0',
-//   style: Theme.of(context).textTheme.headlineMedium,
-// );
-//
-//
-//               }
-//               else if(state is CounterValueChangedState){
-//
-//
-//                 return  Text(
-//                   state.counter.toString(),
-//                   style: Theme.of(context).textTheme.headlineMedium,
-//                 );
-//               }
-//               return Container();
-//
-//
-//
-//             }
-//             ,)
           ],
         ),
       ),
